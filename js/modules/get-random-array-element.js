@@ -1,5 +1,5 @@
-import {returnRundomNumber} from './modules/return-rundom-number.js';
+import {returnRandomNumber} from './modules/return-random-number.js';
 
-const getRandomArrayElement = (elements) => elements[returnRundomNumber(0, elements.length - 1)];
+const getRandomArrayElement = (elements) => elements[returnRandomNumber(0, elements.length - 1)];
 
 export {getRandomArrayElement};

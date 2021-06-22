@@ -1,4 +1,4 @@
-const returnRundomNumber = function (firstNumber, secondNumber) {
+const returnRandomNumber = function (firstNumber, secondNumber) {
   if (firstNumber < 0 || secondNumber < 0) {
     return NaN;
   }
@@ -10,7 +10,7 @@ const returnRundomNumber = function (firstNumber, secondNumber) {
   return Math.round(Math.random() * (secondNumber - firstNumber) + firstNumber);
 };
 
-const returnRundomFloat = function (firstNumber, secondNumber, numberOfSings = 0) {
+const returnRandomFloat = function (firstNumber, secondNumber, numberOfSings = 0) {
   const rendomNumber = Math.random() * (secondNumber - firstNumber) + firstNumber;
 
   if (firstNumber < 0 || secondNumber < 0 || numberOfSings < 0) {
@@ -26,4 +26,4 @@ const returnRundomFloat = function (firstNumber, secondNumber, numberOfSings = 0
   return Math.round(rendomNumber * multiplicator) / multiplicator;
 };
 
-export {returnRundomNumber, returnRundomFloat};
+export {returnRandomNumber, returnRandomFloat};
