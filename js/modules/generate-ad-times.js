@@ -1,6 +1,6 @@
-import {returnRandomNumber, returnRandomFloat} from './modules/return-random-number.js';
-import {getRandomArrayElement} from './modules/get-random-array-element.js';
-import {getArrayRandomLength} from './modules/get-array-random-length.js';
+import {returnRandomNumber, returnRandomFloat} from './return-random-number.js';
+import {getRandomArrayElement} from './get-random-array-element.js';
+import {getArrayRandomLength} from './get-array-random-length.js';
 
 const typesOfHousin = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const conveniences = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
@@ -9,28 +9,31 @@ const ARRAY_LENGTH = 10;
 const  images = new Array(ARRAY_LENGTH).fill(null).map((elem, index) =>
   `img/avatars/user${(index + 1).toString().padStart(2, '0')}.png`);
 
-const generateAd = () => ({
-  author: {
-    avatar: getRandomArrayElement(images),
-  },
-  location: {
+const generateAd = () => {
+  const location = {
     lat: returnRandomFloat(35.65000, 35.70000, 5),
     lng: returnRandomFloat(139.70000, 139.80000, 5),
-  },
-  offer: {
-    title: 'Объявление',
-    address: `${location.lat}, ${location.lng}`,
-    price: returnRandomNumber(0, 1000000),
-    type: getRandomArrayElement(typesOfHousin),
-    rooms: returnRandomNumber(1, 10),
-    guests: returnRandomNumber(0, 100),
-    checkin: `${returnRandomNumber(12, 14)}:00`,
-    checkout: `${returnRandomNumber(12, 14)}:00`,
-    features: getArrayRandomLength(conveniences),
-    description: 'Просторное светлое помещение с видом на море.',
-    photos: getArrayRandomLength(pictures),
-  },
-});
+  };
+  return {
+    author: {
+      avatar: getRandomArrayElement(images),
+    },
+    location: location,
+    offer: {
+      title: 'Объявление',
+      address: `${location.lat}, ${location.lng}`,
+      price: returnRandomNumber(0, 1000000),
+      type: getRandomArrayElement(typesOfHousin),
+      rooms: returnRandomNumber(1, 10),
+      guests: returnRandomNumber(0, 100),
+      checkin: `${returnRandomNumber(12, 14)}:00`,
+      checkout: `${returnRandomNumber(12, 14)}:00`,
+      features: getArrayRandomLength(conveniences),
+      description: 'Просторное светлое помещение с видом на море.',
+      photos: getArrayRandomLength(pictures),
+    },
+  };
+};
 
 const generateAdTimes = (number) => (
   new Array(number).fill(null).map(generateAd)

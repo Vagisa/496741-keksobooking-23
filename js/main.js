@@ -1,5 +1,5 @@
-import {generateAdTimes} from './modules/generate-ad-times.js';
+import {generateAdCard} from './modules/create-ad-card.js';
 
-const NUMBER_GENERATIONS = 10;
+const NUMBER_GENERATIONS = 1;
 
-generateAdTimes(NUMBER_GENERATIONS);
+generateAdCard(NUMBER_GENERATIONS);
