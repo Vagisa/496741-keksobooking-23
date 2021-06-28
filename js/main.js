@@ -1,5 +1,8 @@
-import {generateAdCard} from './modules/create-ad-card.js';
+import {generateAdCardFragment} from './modules/create-ad-card.js';
 
 const NUMBER_GENERATIONS = 1;
+const mapCanvas = document.querySelector('#map-canvas');
 
-generateAdCard(NUMBER_GENERATIONS);
+const adFragment = generateAdCardFragment(NUMBER_GENERATIONS);
+
+mapCanvas.appendChild(adFragment);
