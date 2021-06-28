@@ -1,4 +1,4 @@
-import {returnRandomNumber} from './modules/return-random-number.js';
+import {returnRandomNumber} from './return-random-number.js';
 
 const getArrayRandomLength = (initialArrayElements) =>
 {
