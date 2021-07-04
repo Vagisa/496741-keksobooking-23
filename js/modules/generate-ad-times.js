@@ -9,9 +9,16 @@ const pictures = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
-const ARRAY_LENGTH = 10;
-const  images = new Array(ARRAY_LENGTH).fill(null).map((elem, index) =>
-  `img/avatars/user${(index + 1).toString().padStart(2, '0')}.png`);
+
+let avatarIndex = 1;
+const getAvatarUrl = () => {
+  if (avatarIndex > 10) {
+    return '';
+  }
+  const url = `img/avatars/user${(avatarIndex).toString().padStart(2, '0')}.png`;
+  avatarIndex++;
+  return url;
+};
 
 const generateAd = () => {
   const location = {
@@ -20,7 +27,7 @@ const generateAd = () => {
   };
   return {
     author: {
-      avatar: getRandomArrayElement(images),
+      avatar: getAvatarUrl(),
     },
     location: location,
     offer: {
