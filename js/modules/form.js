@@ -2,6 +2,9 @@ const rooms = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
 const titleInput = document.querySelector('#title');
 const priceInput = document.querySelector('#price');
+const typeSelect = document.querySelector('#type');
+const timeInSelect = document.querySelector('#timein');
+const timeOutSelect = document.querySelector('#timeout');
 const DEFAULT_ROOMS_NUMBER = 1;
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -52,7 +55,7 @@ titleInput.addEventListener('input', () => {
 
 priceInput.addEventListener('input', () => {
   const price = priceInput.value;
-  const typeValue = document.querySelector('#type').value;
+  const typeValue = typeSelect.value;
   if (price < MIN_PRICE_BY_TYPE[typeValue]) {
     priceInput.setCustomValidity(`Минимально возможная цена ${MIN_PRICE_BY_TYPE[typeValue]}`);
   } else if (price > MAX_PRICE) {
@@ -62,4 +65,18 @@ priceInput.addEventListener('input', () => {
   }
 
   priceInput.reportValidity();
+});
+
+typeSelect.addEventListener('change', () => {
+  const minPrice = MIN_PRICE_BY_TYPE[typeSelect.value];
+  priceInput.min = minPrice;
+  priceInput.placeholder = minPrice;
+});
+
+timeInSelect.addEventListener('change', () => {
+  timeOutSelect.value = timeInSelect.value;
+});
+
+timeOutSelect.addEventListener('change', () => {
+  timeInSelect.value = timeOutSelect.value;
 });
