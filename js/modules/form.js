@@ -6,6 +6,8 @@ const typeSelect = document.querySelector('#type');
 const timeInSelect = document.querySelector('#timein');
 const timeOutSelect = document.querySelector('#timeout');
 const DEFAULT_ROOMS_NUMBER = 1;
+const MAX_GUESTS = 100;
+const NOT_FOR_GUESTS = 0;
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE = 1000000;
@@ -20,10 +22,10 @@ const MIN_PRICE_BY_TYPE = {
 const limitGuestNumber = (roomsNumber) => {
 
   for (const capacityOption of capacity.options) {
-    if (Number(roomsNumber) >= 100) {
-      capacityOption.disabled = Number(capacityOption.value) > 0;
+    if (Number(roomsNumber) >= MAX_GUESTS) {
+      capacityOption.disabled = Number(capacityOption.value) > NOT_FOR_GUESTS;
     } else {
-      if (Number(capacityOption.value) === 0) {
+      if (Number(capacityOption.value) === NOT_FOR_GUESTS) {
         capacityOption.disabled = true;
       } else {
         capacityOption.disabled = Number(capacityOption.value) > Number(roomsNumber);
@@ -34,6 +36,11 @@ const limitGuestNumber = (roomsNumber) => {
 
 rooms.addEventListener('change', (event) => {
   const roomsNumber = event.target.value;
+  if (rooms.value >= MAX_GUESTS) {
+    capacity.value = NOT_FOR_GUESTS;
+  } else if (capacity.value > rooms.value || Number(capacity.value) === 0) {
+    capacity.value = rooms.value;
+  }
   limitGuestNumber(roomsNumber);
 });
 
@@ -52,6 +59,7 @@ titleInput.addEventListener('input', () => {
 
   titleInput.reportValidity();
 });
+
 
 priceInput.addEventListener('input', () => {
   const price = priceInput.value;
