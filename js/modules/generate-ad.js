@@ -45,9 +45,9 @@ const generateAd = () => {
     },
   };
 };
-
+/*
 const generateAdTimes = (number) => (
   new Array(number).fill(null).map(generateAd)
 );
-
-export {generateAdTimes};
+*/
+export {generateAd};
