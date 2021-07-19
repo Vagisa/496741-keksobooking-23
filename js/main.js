@@ -1,5 +1,6 @@
 import {generateAdCardFragment} from './modules/create-ad-card.js';
 import {switchPageActiveState} from './modules/switch-page-active-state.js';
+import './modules/form.js';
 
 const NUMBER_GENERATIONS = 1;
 const mapCanvas = document.querySelector('#map-canvas');
