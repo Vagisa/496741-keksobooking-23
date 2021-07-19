@@ -1,4 +1,4 @@
-const rooms = document.querySelector('#room_number');
+const roomsSelect = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
 const titleInput = document.querySelector('#title');
 const priceInput = document.querySelector('#price');
@@ -34,12 +34,12 @@ const limitGuestNumber = (roomsNumber) => {
   }
 };
 
-rooms.addEventListener('change', (event) => {
+roomsSelect.addEventListener('change', (event) => {
   const roomsNumber = event.target.value;
-  if (rooms.value >= MAX_GUESTS) {
+  if (roomsSelect.value >= MAX_GUESTS) {
     capacity.value = NOT_FOR_GUESTS;
-  } else if (capacity.value > rooms.value || Number(capacity.value) === 0) {
-    capacity.value = rooms.value;
+  } else if (capacity.value > roomsSelect.value || Number(capacity.value) === 0) {
+    capacity.value = roomsSelect.value;
   }
   limitGuestNumber(roomsNumber);
 });
