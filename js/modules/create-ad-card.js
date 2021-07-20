@@ -19,14 +19,18 @@ const generateAdElement = (ad) => {
   adCard.querySelector('.popup__text--time').textContent = `Заезд после ${ad.offer.checkin}, выезд до ${ad.offer.checkout}`;
   adCard.querySelector('.popup__features').textContent = ad.offer.features;
   adCard.querySelector('.popup__description').textContent = ad.offer.description;
-  ad.offer.photos.forEach((url, index) => {
-    let photo = adCard.querySelector('.popup__photo');
-    if (index > 0) {
-      photo = adCard.querySelector('.popup__photo').cloneNode();
-    }
-    photo.src = url;
-    popupPhotos.appendChild(photo);
-  });
+  if (ad.offer.photos) {
+    ad.offer.photos.forEach((url, index) => {
+      let photo = adCard.querySelector('.popup__photo');
+      if (index > 0) {
+        photo = adCard.querySelector('.popup__photo').cloneNode();
+      }
+      photo.src = url;
+      popupPhotos.appendChild(photo);
+    });
+  } else {
+    adCard.querySelector('.popup__photo').remove();
+  }
   adCard.querySelector('.popup__avatar').src = ad.author.avatar;
 
   return adCard;

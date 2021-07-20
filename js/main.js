@@ -1,5 +1,6 @@
 import './modules/form.js';
 import './modules/map.js';
+import {getData} from './modules/api.js';
+import { createMarker } from './modules/map.js';
 
-//const mapCanvas = document.querySelector('#map-canvas');
-//mapCanvas.appendChild(adFragment);
+getData(createMarker);
