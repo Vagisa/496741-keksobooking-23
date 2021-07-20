@@ -1,5 +1,3 @@
-import {generateAdTimes} from './generate-ad-times.js';
-
 const createAdCardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const typeTranslations = {
@@ -34,13 +32,4 @@ const generateAdElement = (ad) => {
   return adCard;
 };
 
-const generateAdCardFragment = (number) => {
-  const fragment = document.createDocumentFragment();
-  generateAdTimes(number).forEach((ad) => {
-    const adCard = generateAdElement(ad);
-    fragment.appendChild(adCard);
-  });
-  return fragment;
-};
-
-export {generateAdCardFragment};
+export {generateAdElement};
