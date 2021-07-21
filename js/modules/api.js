@@ -1,10 +1,16 @@
-const SIMILAR_ADS_COUNT = 10;
-
-const getData = (onSuccess) => {
+const getData = (onSuccess, onFail) => {
   fetch('https://23.javascript.pages.academy/keksobooking/data')
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        onFail('Не удалось получить данные. Попробуйте ещё раз');
+      }
+    })
     .then((ads) => {
-      ads.slice(0, SIMILAR_ADS_COUNT).forEach(onSuccess);
+      onSuccess(ads);
+    }).catch(() => {
+      onFail('Не удалось получить данные. Попробуйте ещё раз');
     });
 };
 
