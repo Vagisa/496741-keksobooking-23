@@ -1,4 +1,4 @@
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const FILES_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const avatarChooser = document.querySelector('#avatar');
 const avatarPreview = document.querySelector('.ad-form-header__preview img');
@@ -9,7 +9,7 @@ avatarChooser.addEventListener('change', () => {
   const file = avatarChooser.files[0];
   const fileName = file.name.toLowerCase();
 
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {
     const reader = new FileReader();
@@ -25,7 +25,7 @@ imagesChooser.addEventListener('change', () => {
   const file = imagesChooser.files[0];
   const fileName = file.name.toLowerCase();
 
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {
     const reader = new FileReader();

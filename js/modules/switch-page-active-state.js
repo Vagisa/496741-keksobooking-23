@@ -6,11 +6,11 @@ const switchAdFormActiveState = (active) => {
   if (active) {
     adForm.classList.remove('ad-form--disabled');
     adFormHeader.disabled = false;
-    adFormElements.forEach((element) => element.disabled = false);
+    adFormElements.forEach((element) => {element.disabled = false;});
   } else {
     adForm.classList.add('ad-form--disabled');
     adFormHeader.disabled = true;
-    adFormElements.forEach((element) => element.disabled = true);
+    adFormElements.forEach((element) => {element.disabled = true;});
   }
 };
 
@@ -21,11 +21,11 @@ const switchFilterFormActiveState = (active) => {
 
   if (active) {
     mapFilters.classList.remove('map__filters--disabled');
-    mapFiltersElements.forEach((element) => element.disabled = false);
+    mapFiltersElements.forEach((element) => {element.disabled = false;});
     mapFeatures.disabled = false;
   } else {
     mapFilters.classList.add('map__filters--disabled');
-    mapFiltersElements.forEach((element) => element.disabled = true);
+    mapFiltersElements.forEach((element) => {element.disabled = true;});
     mapFeatures.disabled = true;
   }
 };

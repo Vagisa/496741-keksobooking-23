@@ -128,11 +128,11 @@ clearButton.addEventListener('click', (evt) => {
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const formData = new FormData(evt.target);
-  const onSuccess = () => {
+  const onSendSuccess = () => {
     clearForm();
     showSuccess();
   };
-  sendData(onSuccess, showAlert, formData);
+  sendData(onSendSuccess, showAlert, formData);
 });
 
 export {clearForm, setAddress};
