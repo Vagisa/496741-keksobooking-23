@@ -44,7 +44,7 @@ const limitGuestNumber = (roomsNumber) => {
 };
 
 const setAddress = (location) => {
-  address.value = `lat:${location.lat}, lng:${location.lng}`;
+  address.value = `${location.lat}, ${location.lng}`;
 };
 
 roomsSelect.addEventListener('change', (event) => {
