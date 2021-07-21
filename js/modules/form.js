@@ -2,18 +2,6 @@ import {resetMap} from './map.js';
 import {showAlert, showSuccess} from './util.js';
 import {sendData} from './api.js';
 
-const roomsSelect = document.querySelector('#room_number');
-const capacity = document.querySelector('#capacity');
-const titleInput = document.querySelector('#title');
-const priceInput = document.querySelector('#price');
-const address = document.querySelector('#address');
-const typeSelect = document.querySelector('#type');
-const timeInSelect = document.querySelector('#timein');
-const timeOutSelect = document.querySelector('#timeout');
-const featuresCheckbox = document.querySelectorAll('.features__checkbox');
-const description = document.querySelector('#description');
-const clearButton = document.querySelector('.ad-form__reset');
-const adForm = document.querySelector('.ad-form');
 const DEFAULT_ROOMS_NUMBER = 1;
 const MAX_GUESTS = 100;
 const NOT_FOR_GUESTS = 0;
@@ -27,6 +15,19 @@ const MIN_PRICE_BY_TYPE = {
   house: 5000,
   palace: 10000,
 };
+
+const roomsSelect = document.querySelector('#room_number');
+const capacity = document.querySelector('#capacity');
+const titleInput = document.querySelector('#title');
+const priceInput = document.querySelector('#price');
+const address = document.querySelector('#address');
+const typeSelect = document.querySelector('#type');
+const timeInSelect = document.querySelector('#timein');
+const timeOutSelect = document.querySelector('#timeout');
+const featuresCheckbox = document.querySelectorAll('.features__checkbox');
+const description = document.querySelector('#description');
+const clearButton = document.querySelector('.ad-form__reset');
+const adForm = document.querySelector('.ad-form');
 
 const limitGuestNumber = (roomsNumber) => {
 

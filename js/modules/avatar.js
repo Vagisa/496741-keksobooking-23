@@ -1,6 +1,9 @@
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 const avatarChooser = document.querySelector('#avatar');
 const avatarPreview = document.querySelector('.ad-form-header__preview img');
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const imagesChooser = document.querySelector('#images');
+const imagesPreview = document.querySelector('.ad-form__photo img');
 
 avatarChooser.addEventListener('change', () => {
   const file = avatarChooser.files[0];
@@ -18,9 +21,6 @@ avatarChooser.addEventListener('change', () => {
   }
 });
 
-const imagesChooser = document.querySelector('#images');
-const imagesPreview = document.querySelector('.ad-form__photo img');
-
 imagesChooser.addEventListener('change', () => {
   const file = imagesChooser.files[0];
   const fileName = file.name.toLowerCase();
@@ -36,4 +36,3 @@ imagesChooser.addEventListener('change', () => {
     reader.readAsDataURL(file);
   }
 });
-

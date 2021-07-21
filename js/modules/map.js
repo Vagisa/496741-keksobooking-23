@@ -10,6 +10,8 @@ const DEFAULT_LOCATION = {
   lat: 35.67194,
   lng: 139.75382,
 };
+const DEFAULT_MAP_SCALE = 13;
+
 const map = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(map);
 let similarAds = [];
@@ -70,7 +72,7 @@ const mainPinMarker = L.marker(
   },
 );
 
-map.setView(DEFAULT_LOCATION, 13);
+map.setView(DEFAULT_LOCATION, DEFAULT_MAP_SCALE);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -89,7 +91,7 @@ mainPinMarker.on('moveend', (evt) => {
 
 const resetMap = () => {
   mainPinMarker.setLatLng(DEFAULT_LOCATION);
-  map.setView(DEFAULT_LOCATION, 13);
+  map.setView(DEFAULT_LOCATION, DEFAULT_MAP_SCALE);
   setAddress(DEFAULT_LOCATION);
 };
 

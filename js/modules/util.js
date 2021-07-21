@@ -1,9 +1,7 @@
-const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const ALERT_SHOW_TIME = 5000;
 
-const getRandomArrayElement = (elements) =>
-  elements[_.random(0, elements.length - 1)];
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
 
 const isEscEvent = (evt) =>
   evt.key === 'Escape' || evt.key === 'Esc';
@@ -51,4 +49,4 @@ const showSuccess = () => {
   }, ALERT_SHOW_TIME);
 };
 
-export {getRandomArrayElement, isEscEvent, isEnterEvent, showAlert, showSuccess};
+export {isEscEvent, isEnterEvent, showAlert, showSuccess};
