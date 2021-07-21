@@ -17,7 +17,11 @@ const generateAdElement = (ad) => {
   adCard.querySelector('.popup__type').textContent = typeTranslations[ad.offer.type];
   adCard.querySelector('.popup__text--capacity').textContent = `${ad.offer.rooms} комнаты для ${ad.offer.guests} гостей`;
   adCard.querySelector('.popup__text--time').textContent = `Заезд после ${ad.offer.checkin}, выезд до ${ad.offer.checkout}`;
-  adCard.querySelector('.popup__features').textContent = ad.offer.features;
+  if (ad.offer.features) {
+    adCard.querySelector('.popup__features').textContent = ad.offer.features;
+  } else {
+    adCard.querySelector('.popup__features').remove();
+  }
   adCard.querySelector('.popup__description').textContent = ad.offer.description;
   if (ad.offer.photos) {
     ad.offer.photos.forEach((url, index) => {

@@ -1,30 +1,65 @@
-import {switchPageActiveState} from './switch-page-active-state.js';
+import {switchAdFormActiveState, switchFilterFormActiveState} from './switch-page-active-state.js';
 import {generateAdElement} from './create-ad-card.js';
 import {setAddress} from './form.js';
+import {getData} from './api.js';
+import {compareAds} from './similar-list.js';
+import {showAlert} from './util.js';
 
+const SIMILAR_ADS_COUNT = 10;
 const DEFAULT_LOCATION = {
   lat: 35.67194,
   lng: 139.75382,
 };
 const map = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(map);
+let similarAds = [];
 
-switchPageActiveState(false);
+const createMarker = (ad) => {
+  const pinIcon = L.icon({
+    iconUrl: '/img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20,40],
+  });
+
+  const marker = L.marker(
+    ad.location,
+    {
+      icon: pinIcon,
+    },
+  );
+  marker.addTo(markerGroup).bindPopup(
+    generateAdElement(ad),
+    {
+      keepInView: true,
+    },
+  );
+  return marker;
+};
+
+const renderMarkers = () => {
+  markerGroup.clearLayers();
+  const ads = similarAds.slice().sort(compareAds).slice(0, SIMILAR_ADS_COUNT);
+  ads.map(createMarker);
+};
+
+switchAdFormActiveState(false);
+switchFilterFormActiveState(false);
 
 map.on('load', () => {
-  switchPageActiveState(true);
+  switchAdFormActiveState(true);
+  getData((ads) => {
+    similarAds = ads;
+    renderMarkers();
+    switchFilterFormActiveState(true);
+  },
+  showAlert,
+  );
 });
 
 const mainPinIcon = L.icon({
   iconUrl: '/img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26,52],
-});
-
-const pinIcon = L.icon({
-  iconUrl: '/img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20,40],
 });
 
 const mainPinMarker = L.marker(
@@ -52,26 +87,10 @@ mainPinMarker.on('moveend', (evt) => {
   });
 });
 
-const createMarker = (ad) => {
-  const marker = L.marker(
-    ad.location,
-    {
-      icon: pinIcon,
-    },
-  );
-  marker.addTo(markerGroup).bindPopup(
-    generateAdElement(ad),
-    {
-      keepInView: true,
-    },
-  );
-  return marker;
-};
-
 const resetMap = () => {
   mainPinMarker.setLatLng(DEFAULT_LOCATION);
   map.setView(DEFAULT_LOCATION, 13);
   setAddress(DEFAULT_LOCATION);
 };
 
-export {createMarker, resetMap};
+export {renderMarkers, resetMap};

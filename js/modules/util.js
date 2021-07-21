@@ -11,15 +11,15 @@ const isEscEvent = (evt) =>
 const isEnterEvent = (evt) =>
   evt.key === 'Enter';
 
-const showAlert = () => {
+const showAlert = (message) => {
   const errorMessage = errorTemplate.cloneNode(true);
+  errorMessage.querySelector('.error__message').textContent = message;
   document.body.append(errorMessage);
 
   document.addEventListener('keydown', (evt) => {
     if (isEscEvent(evt) || isEnterEvent(evt)) {
       errorMessage.remove();
     }
-
   });
 
   document.addEventListener('click', () => {
