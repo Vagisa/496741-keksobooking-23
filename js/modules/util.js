@@ -9,44 +9,45 @@ const isEscEvent = (evt) =>
 const isEnterEvent = (evt) =>
   evt.key === 'Enter';
 
-const showAlert = (message) => {
-  const errorMessage = errorTemplate.cloneNode(true);
-  errorMessage.querySelector('.error__message').textContent = message;
-  document.body.append(errorMessage);
+const showMessage = (messageTemplate, messageParagraphClass, message) => {
+  const messageElement = messageTemplate.cloneNode(true);
+  if (message) {
+    messageElement.querySelector(messageParagraphClass).textContent = message;
+  }
+  document.body.append(messageElement);
+  let removeErrorMessage = null;
 
-  document.addEventListener('keydown', (evt) => {
+  const keyHandler = (evt) => {
     if (isEscEvent(evt) || isEnterEvent(evt)) {
-      errorMessage.remove();
+      removeErrorMessage();
     }
-  });
+  };
 
-  document.addEventListener('click', () => {
-    errorMessage.remove();
-  });
+  const clickHandler = () => {
+    removeErrorMessage();
+  };
 
-  setTimeout(() => {
-    errorMessage.remove();
+  document.addEventListener('keydown', keyHandler);
+  document.addEventListener('click', clickHandler);
+
+  const timeoutId = setTimeout(() => {
+    removeErrorMessage();
   }, ALERT_SHOW_TIME);
 
+  removeErrorMessage = () => {
+    document.removeEventListener('keydown', keyHandler);
+    document.removeEventListener('click', clickHandler);
+    clearTimeout(timeoutId);
+    messageElement.remove();
+  };
+};
+
+const showAlert = (message) => {
+  showMessage(errorTemplate, '.error__message', message);
 };
 
 const showSuccess = () => {
-  const successMessage = successTemplate.cloneNode(true);
-  document.body.append(successMessage);
-
-  document.addEventListener('keydown', (evt) => {
-    if (isEscEvent(evt) || isEnterEvent(evt)) {
-      successMessage.remove();
-    }
-  });
-
-  document.addEventListener('click', () => {
-    successMessage.remove();
-  });
-
-  setTimeout(() => {
-    successMessage.remove();
-  }, ALERT_SHOW_TIME);
+  showMessage(successTemplate);
 };
 
 export {isEscEvent, isEnterEvent, showAlert, showSuccess};
