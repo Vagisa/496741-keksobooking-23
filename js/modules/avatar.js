@@ -4,7 +4,6 @@ const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 avatarChooser.addEventListener('change', () => {
   const file = avatarChooser.files[0];
-  console.log(file);
   const fileName = file.name.toLowerCase();
 
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
