@@ -6,6 +6,7 @@ const housingTypeSelect = document.querySelector('#housing-type');
 const housingPriceSelect = document.querySelector('#housing-price');
 const housingRoomsSelect = document.querySelector('#housing-rooms');
 const housingGuestsSelect = document.querySelector('#housing-guests');
+const featuresCheckbox = document.querySelectorAll('.map__checkbox');
 
 mapFiltersForm.addEventListener('change', () => {
   const debouncedRenderMarkers = debounce(renderMarkers);
@@ -16,45 +17,33 @@ mapFiltersForm.addEventListener('change', () => {
   debouncedRenderMarkers();
 });
 
-const prioritizeAd = (ad) => {
-  let priority = 0;
-  if (ad.offer.type === housingTypeSelect.value) {priority += 3;}
-  if (ad.offer.price === housingPriceSelect.value) {priority += 2;}
+const filterAd = (ad) => {
+  if (housingTypeSelect.value !== 'any' && ad.offer.type !== housingTypeSelect.value) {return false;}
   switch (housingPriceSelect.value) {
     case 'middle':
-      if (ad.offer.price >= 10000 && ad.offer.price <= 50000) {
-        priority += 2;
+      if (ad.offer.price < 10000 || ad.offer.price > 50000) {
+        return false;
       }
       break;
     case 'low':
-      if (ad.offer.price < 10000) {
-        priority += 2;
+      if (ad.offer.price >= 10000) {
+        return false;
       }
       break;
     case 'high':
-      if (ad.offer.price > 50000) {
-        priority += 2;
+      if (ad.offer.price <= 50000) {
+        return false;
       }
       break;
-    default:
-      priority += 2;
   }
-  if (ad.offer.rooms === Number(housingRoomsSelect.value)) {priority += 1;}
-  if (ad.offer.guests === Number(housingGuestsSelect.value)) {priority += 1;}
-  if (ad.offer.features) {
-    ad.offer.features.forEach((feature) => {
-      if (document.querySelector(`#filter-${feature}`).checked) {priority += 1;}
-    });
+  if (housingRoomsSelect.value !== 'any' && ad.offer.rooms !== Number(housingRoomsSelect.value)) {return false;}
+  if (housingGuestsSelect.value !== 'any' && ad.offer.guests !== Number(housingGuestsSelect.value)) {return false;}
+  for (const checkbox of featuresCheckbox) {
+    if (checkbox.checked && (!ad.offer.features || !ad.offer.features.includes(checkbox.value))) {
+      return false;
+    }
   }
-
-  return priority;
+  return true;
 };
 
-const compareAds = (firstAd, secondAd) => {
-  const priorityFirst = prioritizeAd(firstAd);
-  const prioritySecond = prioritizeAd(secondAd);
-
-  return prioritySecond - priorityFirst;
-};
-
-export {compareAds};
+export {filterAd};

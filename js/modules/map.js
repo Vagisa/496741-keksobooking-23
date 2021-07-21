@@ -2,7 +2,7 @@ import {switchAdFormActiveState, switchFilterFormActiveState} from './switch-pag
 import {generateAdElement} from './create-ad-card.js';
 import {setAddress} from './form.js';
 import {getData} from './api.js';
-import {compareAds} from './similar-list.js';
+import {filterAd} from './similar-list.js';
 import {showAlert} from './util.js';
 
 const SIMILAR_ADS_COUNT = 10;
@@ -38,7 +38,7 @@ const createMarker = (ad) => {
 
 const renderMarkers = () => {
   markerGroup.clearLayers();
-  const ads = similarAds.slice().sort(compareAds).slice(0, SIMILAR_ADS_COUNT);
+  const ads = similarAds.slice().filter(filterAd).slice(0, SIMILAR_ADS_COUNT);
   ads.map(createMarker);
 };
 
